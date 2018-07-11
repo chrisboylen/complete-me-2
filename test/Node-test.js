@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import Node from '../lib/Node';
 
-describe('Node', () => {
+describe('NODE', () => {
   let node;
 
   beforeEach(() => {
