@@ -43,4 +43,12 @@ describe('TRIE', () => {
       expect(trie.rootNode.children.a.word).to.equal('a');
     })
 
+    it('Should force word to lowercase', () => {
+      trie.insert('ANN');
+      console.log(JSON.stringify(trie, null, 4));
+
+      expect(trie.rootNode.children.a.word).to.equal('a');
+      expect(trie.rootNode.children.a.children.n.word).to.equal('n');
+    })
+
 })
