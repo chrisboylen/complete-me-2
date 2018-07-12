@@ -57,10 +57,18 @@ describe('TRIE', () => {
       expect(trie.count).to.equal(1);
     })
 
-    it('should define the end of a word', () => {
+    it('Should define the end of a word', () => {
       trie.insert('ann');
 
       expect(trie.rootNode.children.a.children.n.children.n.completedWord).to.equal('ann');
-    });
+    })
+
+    it('Should not increase count when duplicate words are inserted', () => {
+      trie.insert('ann');
+      trie.insert('dan');
+      trie.insert('ann');
+
+      expect(trie.count).to.equal(2);
+    })
 
 })
