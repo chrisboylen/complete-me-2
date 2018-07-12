@@ -86,4 +86,11 @@ describe('TRIE', () => {
 
     })
 
+    describe('SEARCH', () => {
+      it('Should exist and be a method on the trie class', () => {
+
+        expect(trie).respondsTo('search');
+      })
+
+    })
 })
