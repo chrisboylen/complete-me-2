@@ -32,7 +32,7 @@ describe('TRIE', () => {
     it('Should add a letter to the trie', () => {
       trie.insert('ann');
 
-      expect(trie.count).to.equal(1);
+      
       expect(trie.rootNode.children.a.word).to.equal('a');
       expect(trie.rootNode.children.a.children.n.word).to.equal('n'); 
     })
@@ -49,6 +49,12 @@ describe('TRIE', () => {
 
       expect(trie.rootNode.children.a.word).to.equal('a');
       expect(trie.rootNode.children.a.children.n.word).to.equal('n');
+    })
+
+    it('Should increase count when word is inserted into trie', () => {
+      trie.insert('ANN');
+
+      expect(trie.count).to.equal(1);
     })
 
 })
