@@ -26,6 +26,14 @@ describe('TRIE', () => {
       expect(trie.suggestedWords).to.be.empty;
     })
 
+    describe('FINDWORD', () => {
+      it('Should exist and be a method on the trie class', () => {
+
+      expect(trie).respondsTo('findWord');
+      })
+
+    })
+
     describe('INSERT', () => {
 
       it('Should exist and be a method on the trie class', () => {
