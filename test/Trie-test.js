@@ -39,7 +39,15 @@ describe('TRIE', () => {
         expect(trie.findWord('ann')).to.deep.equal(trie.rootNode.children.a.children.n.children.n);
       })
 
-      it('Should return null if there no word that matches', () => {
+      it('Should return the correct word when completed word still has children', () => {
+        trie.insert('ann');
+        trie.insert('anna');
+        trie.findWord('ann');
+
+        expect(trie.findWord('ann')).to.deep.equal(trie.rootNode.children.a.children.n.children.n);
+      })
+
+      it('Should return null if there no words that match', () => {
         trie.findWord('ann');
 
         expect(trie.findWord('ann')).to.deep.equal(null);
@@ -48,7 +56,6 @@ describe('TRIE', () => {
     })
 
     describe('INSERT', () => {
-
       it('Should exist and be a method on the trie class', () => {
 
         expect(trie).respondsTo('insert');
@@ -57,7 +64,6 @@ describe('TRIE', () => {
       it('Should add a letter to the trie', () => {
         trie.insert('ann');
 
-        
         expect(trie.rootNode.children.a.word).to.equal('a');
         expect(trie.rootNode.children.a.children.n.word).to.equal('n'); 
       })
