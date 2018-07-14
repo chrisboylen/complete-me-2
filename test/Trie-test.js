@@ -32,11 +32,17 @@ describe('TRIE', () => {
       expect(trie).respondsTo('findWord');
       })
 
-      it ('Should return the last node of a word', () => {
+      it('Should return the last node of a word', () => {
         trie.insert('ann');
         trie.findWord('ann');
         
-        expect(trie.findWord('ann')).to.deep.equal(trie.rootNode.children.a.children.n.children.n)
+        expect(trie.findWord('ann')).to.deep.equal(trie.rootNode.children.a.children.n.children.n);
+      })
+
+      it('Should return null if there no word that matches', () => {
+        trie.findWord('ann');
+
+        expect(trie.findWord('ann')).to.deep.equal(null);
       })
 
     })
