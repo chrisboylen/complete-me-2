@@ -9,17 +9,22 @@ describe('TRIE', () => {
     trie = new Trie();
   })
 
-   it('Should be a thing', () => {
-     expect(trie).to.exist;
-   })
+    it('Should be a thing', () => {
+      expect(trie).to.exist;
+    })
 
-   it('Should have a rootNode that is a new instance of a node', () => {
-     expect(trie.rootNode).to.be.an.instanceof(Node)
-   })
+    it('Should have a rootNode that is a new instance of a node', () => {
+      expect(trie.rootNode).to.be.an.instanceof(Node)
+    })
 
-   it('Should have property of count set to 0', () => {
-     expect(trie.count).to.equal(0);
-   })
+    it('Should have property of count set to 0', () => {
+      expect(trie.count).to.equal(0);
+    })
+
+    it('Should have suggested words set to an empty array', () => {
+
+      expect(trie.suggestedWords).to.be.empty;
+    })
 
     describe('INSERT', () => {
 
@@ -84,13 +89,22 @@ describe('TRIE', () => {
         expect(trie).respondsTo('suggest');
       })
 
-    })
+      it('Should push completed words into an array', () => {
 
-    describe('SEARCH', () => {
-      it('Should exist and be a method on the trie class', () => {
+        trie.insert('ann');
+        trie.insert('andrew');
+        trie.searchWords('a')
+        console.log(JSON.stringify(trie, null, 4));
 
-        expect(trie).respondsTo('search');
+        expect(trie.letterKeys).to.be.instanceOf(Array);
       })
 
+    })
+
+    describe('SEARCHWORDS', () => {
+      it('Should exist and be a method on the trie class', () => {
+
+        expect(trie).respondsTo('searchWords');
+      })
     })
 })
