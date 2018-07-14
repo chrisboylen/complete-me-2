@@ -26,31 +26,31 @@ describe('TRIE', () => {
       expect(trie.suggestedWords).to.be.empty;
     })
 
-    describe('FINDWORD', () => {
+    describe('FINDNODEOFWORD', () => {
       it('Should exist and be a method on the trie class', () => {
 
-      expect(trie).respondsTo('findWord');
+      expect(trie).respondsTo('findNodeOfWord');
       })
 
       it('Should return the last node of a word', () => {
         trie.insert('ann');
-        trie.findWord('ann');
+        trie.findNodeOfWord('ann');
         
-        expect(trie.findWord('ann')).to.deep.equal(trie.rootNode.children.a.children.n.children.n);
+        expect(trie.findNodeOfWord('ann')).to.deep.equal(trie.rootNode.children.a.children.n.children.n);
       })
 
       it('Should return the correct word when completed word still has children', () => {
         trie.insert('ann');
         trie.insert('anna');
-        trie.findWord('ann');
+        trie.findNodeOfWord('ann');
 
-        expect(trie.findWord('ann')).to.deep.equal(trie.rootNode.children.a.children.n.children.n);
+        expect(trie.findNodeOfWord('ann')).to.deep.equal(trie.rootNode.children.a.children.n.children.n);
       })
 
       it('Should return null if there no words that match', () => {
-        trie.findWord('ann');
+        trie.findNodeOfWord('ann');
 
-        expect(trie.findWord('ann')).to.deep.equal(null);
+        expect(trie.findNodeOfWord('ann')).to.deep.equal(null);
       })
 
     })
