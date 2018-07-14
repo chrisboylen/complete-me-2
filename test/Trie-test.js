@@ -98,9 +98,15 @@ describe('TRIE', () => {
       it('Should have more than one child when two or more nodes share a parent', () => {
         trie.insert('ann');
         trie.insert('andrew');
-        console.log(JSON.stringify(trie, null, 4));
 
         expect(Object.keys(trie.rootNode.children.a.children.n.children).length).to.equal(2);
+      })
+    })
+
+    describe('DELETE', () => {
+      it('Should exist and be a method on the trie class', () => {
+
+        expect(trie).respondsTo('delete');
       })
     })
 
