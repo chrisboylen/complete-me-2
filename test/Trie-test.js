@@ -164,4 +164,11 @@ describe('TRIE', () => {
         expect(trie).respondsTo('searchWords');
       })
     })
+
+    describe('COUNTER', () => {
+      it('Should exist and be a method on the trie class', () => {
+
+        expect(trie).respondsTo('counter');
+      })
+    })
 })
