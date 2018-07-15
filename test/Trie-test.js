@@ -139,6 +139,15 @@ describe('TRIE', () => {
         expect(trie.suggest('a')).to.deep.equal(['ann', 'andrew']);
       })
 
+      it('Should push correct completed words into an array', () => {
+        trie.insert('ann');
+        trie.insert('allen');
+        trie.insert('andrew');
+        trie.suggest('an')
+
+        expect(trie.suggest('an')).to.deep.equal(['ann', 'andrew']);
+      })
+
       it('Should return null if no words are found', () => {
         trie.insert('ann');
         trie.insert('andrew');
