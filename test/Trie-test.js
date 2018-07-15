@@ -188,4 +188,11 @@ describe('TRIE', () => {
 
         expect(trie).respondsTo('populate');
       })
+
+      it('Should populate the trie with the dictionary in the computer', () => {
+        trie.populate(dictionary);
+        
+        expect(trie.counter()).to.equal(234371)
+      })
+    })
 })
