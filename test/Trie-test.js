@@ -130,6 +130,14 @@ describe('TRIE', () => {
         expect(trie.suggest('a')).to.deep.equal(trie.suggestedWords);
       })
 
+      it('Should return null if no words are found', () => {
+        trie.insert('ann');
+        trie.insert('andrew');
+        trie.suggest('c')
+
+        expect(trie.suggest('c')).to.deep.equal(null);
+      })
+
     })
 
     describe('SEARCHWORDS', () => {
