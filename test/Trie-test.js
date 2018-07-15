@@ -170,5 +170,11 @@ describe('TRIE', () => {
 
         expect(trie).respondsTo('counter');
       })
+
+      it('Should display word count when a word is added to the trie', () => {
+        trie.insert('ann');
+
+        expect(trie.counter()).to.equal(1)
+      })
     })
 })
