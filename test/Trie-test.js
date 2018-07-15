@@ -1,6 +1,11 @@
 import { expect } from 'chai';
 import Trie from '../lib/Trie';
 import Node from '../lib/Node';
+import fs from 'fs';
+
+const text = "/usr/share/dict/words";
+const dictionary = fs.readFileSync(text).toString().trim().split('\n');
+
 
 describe('TRIE', () => {
   let trie;
@@ -177,4 +182,10 @@ describe('TRIE', () => {
         expect(trie.counter()).to.equal(1)
       })
     })
+
+    describe('POPULATE', () => {
+      it('Should exist and be a method ot he trie class', () => {
+
+        expect(trie).respondsTo('populate');
+      })
 })
