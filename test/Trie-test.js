@@ -126,6 +126,14 @@ describe('TRIE', () => {
 
         expect(trie.rootNode.children.a.children.n.children.n.completedWord).to.equal(null);
       })
+
+      it('Should decrease count when word is deleted from trie', () => {
+        trie.insert('ANN');
+        trie.insert('andrew');
+        trie.delete('ann');
+
+        expect(trie.count).to.equal(1);
+      })
     })
 
     describe('SUGGEST', () => {
@@ -198,7 +206,7 @@ describe('TRIE', () => {
 
       it('Should populate the trie with the dictionary in the computer', () => {
         trie.populate(dictionary);
-        
+
         expect(trie.counter()).to.equal(234371)
       })
     })
