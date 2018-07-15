@@ -123,13 +123,11 @@ describe('TRIE', () => {
       })
 
       it('Should push completed words into an array', () => {
-
         trie.insert('ann');
         trie.insert('andrew');
-        trie.searchWords('a')
-        console.log(JSON.stringify(trie, null, 4));
-
-        expect(trie.letterKeys).to.be.instanceOf(Array);
+        trie.suggest('a')
+        
+        expect(trie.suggest('a')).to.deep.equal(trie.suggestedWords);
       })
 
     })
