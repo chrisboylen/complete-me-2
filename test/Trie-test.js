@@ -119,6 +119,13 @@ describe('TRIE', () => {
 
         expect(trie).respondsTo('delete');
       })
+
+      it('Should set the completedWords property of the last node in a word to null', () => {
+        trie.insert('ann');
+        trie.delete('ann');
+
+        expect(trie.rootNode.children.a.children.n.children.n.completedWord).to.equal(null);
+      })
     })
 
     describe('SUGGEST', () => {
