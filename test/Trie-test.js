@@ -52,6 +52,16 @@ describe('TRIE', () => {
         expect(trie.findNodeOfWord('ann')).to.deep.equal(trie.rootNode.children.a.children.n.children.n);
       })
 
+      it('Should return the correct word when completed word has multiple children', () => {
+        trie.insert('ann');
+        trie.insert('anna');
+        trie.insert('andrew');
+        trie.insert('alice');
+        trie.findNodeOfWord('ann');
+
+        expect(trie.findNodeOfWord('ann')).to.deep.equal(trie.rootNode.children.a.children.n.children.n);
+      })
+
       it('Should return null if there no words that match', () => {
         trie.findNodeOfWord('ann');
 
