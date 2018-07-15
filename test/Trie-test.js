@@ -127,7 +127,16 @@ describe('TRIE', () => {
         trie.insert('andrew');
         trie.suggest('a')
         
-        expect(trie.suggest('a')).to.deep.equal(trie.suggestedWords);
+        expect(trie.suggest('a')).to.deep.equal(['ann', 'andrew']);
+      })
+
+      it('Should not push duplicate words into an array', () => {
+        trie.insert('ann');
+        trie.insert('ann');
+        trie.insert('andrew');
+        trie.suggest('a')
+
+        expect(trie.suggest('a')).to.deep.equal(['ann', 'andrew']);
       })
 
       it('Should return null if no words are found', () => {
