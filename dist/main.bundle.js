@@ -115,6 +115,209 @@ var Node = function Node() {
 
 exports.default = Node;
 
+/***/ }),
+
+/***/ "./lib/Trie.js":
+/*!*********************!*\
+  !*** ./lib/Trie.js ***!
+  \*********************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _Node = __webpack_require__(/*! ./Node */ "./lib/Node.js");
+
+var _Node2 = _interopRequireDefault(_Node);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Trie = function () {
+  function Trie() {
+    _classCallCheck(this, Trie);
+
+    this.length = 0;
+    this.rootNode = new _Node2.default();
+    this.count = 0;
+    this.suggestedWords = [];
+  }
+
+  _createClass(Trie, [{
+    key: 'findNodeOfWord',
+    value: function findNodeOfWord(word) {
+      var currentNode = this.rootNode;
+      var letters = [].concat(_toConsumableArray(word.toLowerCase()));
+
+      while (letters.length) {
+        var letter = letters.shift();
+
+        if (currentNode.children[letter]) {
+          currentNode = currentNode.children[letter];
+        } else {
+          return null;
+        }
+      }
+
+      return currentNode;
+    }
+  }, {
+    key: 'insert',
+    value: function insert(word) {
+      var currentNode = this.rootNode;
+      var letters = [].concat(_toConsumableArray(word.toLowerCase()));
+
+      while (letters.length) {
+        var letter = letters.shift();
+
+        if (!currentNode.children[letter]) {
+          currentNode.children[letter] = new _Node2.default(letter);
+        }
+        currentNode = currentNode.children[letter];
+      }
+
+      if (!currentNode.completedWord) {
+        currentNode.completedWord = word.toLowerCase();
+        this.count++;
+      }
+    }
+
+    // delete(word) {
+    //   let currentNode = this.findNodeOfWord(word);
+
+    //   if (currentNode) {
+    //     currentNode.completedWord = null;
+    //     this.count--;
+    //   }
+    // }
+
+  }, {
+    key: 'delete',
+    value: function _delete(word) {
+      var currentNode = this.rootNode;
+      var letters = [].concat(_toConsumableArray(word.toLowerCase()));
+      var prevNode = this.rootNode;
+      var key = void 0;
+
+      letters.forEach(function (letter) {
+        prevNode = currentNode;
+        currentNode = currentNode.children[letter];
+        key = letter;
+      });
+
+      if (currentNode.completedWord) {
+        currentNode.completedWord = null;
+        this.count--;
+      }
+
+      if (!Object.keys(currentNode.children).length) {
+        delete prevNode.children[key];
+        // delete currentNode;
+      }
+    }
+  }, {
+    key: 'suggest',
+    value: function suggest(prefix) {
+      this.suggestedWords = [];
+      var currentNode = this.findNodeOfWord(prefix);
+
+      if (!currentNode) {
+        return null;
+      }
+
+      this.searchWords(currentNode);
+      return this.suggestedWords.map(function (node) {
+        return node.completedWord;
+      });
+    }
+  }, {
+    key: 'searchWords',
+    value: function searchWords(node) {
+      var _this = this;
+
+      if (node.completedWord) {
+        this.suggestedWords.push(node);
+      }
+
+      Object.keys(node.children).forEach(function (letter) {
+        var currentNode = node.children[letter];
+
+        _this.searchWords(currentNode);
+      });
+    }
+  }, {
+    key: 'counter',
+    value: function counter() {
+      return this.count;
+    }
+  }, {
+    key: 'populate',
+    value: function populate(dictionary) {
+      var _this2 = this;
+
+      dictionary.forEach(function (word) {
+        return _this2.insert(word);
+      });
+    }
+  }]);
+
+  return Trie;
+}();
+
+exports.default = Trie;
+
+/***/ }),
+
+/***/ "./lib/index.js":
+/*!**********************!*\
+  !*** ./lib/index.js ***!
+  \**********************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _Trie = __webpack_require__(/*! ./Trie */ "./lib/Trie.js");
+
+var _Trie2 = _interopRequireDefault(_Trie);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// const Trie = require('./Trie.js')
+// import { fs } from 'fs';
+
+var userInput = document.querySelector('.user-input');
+var text = '/usr/share/dict/words';
+var dictionary = fs.readFileSync(text).toString().trim().split('\n');
+var trie = new _Trie2.default();
+
+trie.populate(dictionary);
+
+document.querySelector('.submit').addEventListener('click', function (e) {
+  e.preventDefault();
+  console.log('terry');
+  submitSuggestions();
+});
+
+var submitSuggestions = function submitSuggestions() {
+  console.log('bingo');
+  var word = userInput.nodeValue;
+  var suggestedWords = trie.suggest(word);
+
+  document.querySelector('.display-sug').prepend('<ul class="suggested-list">' + suggestedWords + '</ul>');
+};
+
 /***/ })
 
 /******/ });
