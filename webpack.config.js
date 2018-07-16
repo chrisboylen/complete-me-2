@@ -28,5 +28,8 @@ module.exports = {
   },
   resolve: {
     extensions: ['.js', '.json', '.css']
+  },
+  node: {
+    fs: 'empty'
   }
 };
