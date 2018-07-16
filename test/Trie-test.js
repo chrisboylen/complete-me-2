@@ -140,6 +140,7 @@ describe('TRIE', () => {
       it('Should decrease count when word is deleted from trie', () => {
         trie.insert('ANN');
         trie.insert('andrew');
+        
         trie.delete('ann');
 
         expect(trie.count).to.equal(1);

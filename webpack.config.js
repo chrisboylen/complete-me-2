@@ -7,7 +7,7 @@ module.exports = {
   },
   output: {
     path: __dirname,
-    filename: "dist/[name].bundle.js"
+    filename: "[name].bundle.js"
   },
   mode: 'development',
   module: {
