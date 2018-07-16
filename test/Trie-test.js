@@ -26,11 +26,6 @@ describe('TRIE', () => {
       expect(trie.count).to.equal(0);
     })
 
-    it('Should have suggested words set to an empty array', () => {
-
-      expect(trie.suggestedWords).to.be.empty;
-    })
-
     describe('FINDNODEOFWORD', () => {
       it('Should exist and be a method on the trie class', () => {
 
