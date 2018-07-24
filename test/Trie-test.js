@@ -1,10 +1,9 @@
 import { expect } from 'chai';
 import Trie from '../lib/Trie';
 import Node from '../lib/Node';
-import fs from 'fs';
 
-const text = "/usr/share/dict/words";
-const dictionary = fs.readFileSync(text).toString().trim().split('\n');
+// const text = "/usr/share/dict/words";
+// const dictionary = fs.readFileSync(text).toString().trim().split('\n');
 
 
 describe('TRIE', () => {
